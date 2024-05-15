@@ -122,7 +122,7 @@ public class DoublyLinkedList {
     /**
      * Remove all list elements
      */
-    public void empty() {
+    public void clear() {
         start = null;
         end = null;
         length = 0;

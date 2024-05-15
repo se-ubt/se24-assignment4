@@ -194,8 +194,8 @@ class DoublyLinkedListTest {
         list.append(0.4);
         // then: the list is not empty
         assertFalse(list.isEmpty());
-        // when: emptying the list
-        list.empty();
+        // when: clearing the list
+        list.clear();
         // then: the list is empty again
         assertTrue(list.isEmpty());
     }
