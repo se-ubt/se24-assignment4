@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: se24-linked-list
