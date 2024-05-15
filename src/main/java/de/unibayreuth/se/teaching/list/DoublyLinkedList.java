@@ -168,6 +168,14 @@ public class DoublyLinkedList {
     }
 
     /**
+     * Insert a new element with the given value into the correct position in a sorted list
+     * @param value Value of the new element to insert into the sorted list
+     */
+    public void insert(double value) {
+        insert(new Element(value));
+    }
+
+    /**
      * Inner class for doubly linked list elements
      */
     @Setter
