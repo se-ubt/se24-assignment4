@@ -20,19 +20,13 @@ curl http://localhost:8080/list
 ### Append to list
 
 ```bash
- curl --header "Content-Type: application/json" --request POST --data '[0.5, 0.6]' http://localhost:8080/list  
+ curl --header "Content-Type: application/json" --request POST --data '[{"value": 0.5, "metadata": ""}, {"value": 0.6, "metadata": ""}]' http://localhost:8080/list  
 ```
 
-### Append to list with verbose output
+### Append to list (malformed body)
 
 ```bash
- curl --verbose --header "Content-Type: application/json" --request POST --data '[0.5, 0.6]' http://localhost:8080/list  
-```
-
-### Append to list with verbose output (malformed body)
-
-```bash
- curl --verbose --header "Content-Type: application/json" --request POST --data '[0.5, 0.6' http://localhost:8080/list  
+ curl --header "Content-Type: application/json" --request POST --data '[{"value": 0.5; "metadata": ""}]' http://localhost:8080/list  
 ```
 
 ### Clear list
