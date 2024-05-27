@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.unibayreuth.se.teaching.list</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.5.0</version>
+    </parent>
+
+    <artifactId>business</artifactId>
+
+    <properties>
+        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.business.impl.CucumberListTestRunner</maven.cucumber.testsuite>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.plugin.surefire.version}</version>
+                <configuration>
+                    <test>${maven.cucumber.testsuite}</test>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

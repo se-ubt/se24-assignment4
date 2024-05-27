@@ -10,10 +10,19 @@
     </parent>
 
     <name>List</name>
-    <groupId>de.unibayreuth.se.teaching</groupId>
-    <artifactId>list</artifactId>
-    <version>0.4.0</version>
+    <groupId>de.unibayreuth.se.teaching.list</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.5.0</version>
     <url>https://github.com/se-ubt/se24-assignment4</url>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>business</module>
+        <!--module>data</module--> <!-- will be added later -->
+        <module>api</module>
+        <module>application</module>
+    </modules>
 
     <properties>
         <java.version>21</java.version>
@@ -21,18 +30,19 @@
         <!-- Project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <start-class>de.unibayreuth.se.teaching.list.Application</start-class>
 
         <!-- Maven -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.mainclass>de.unibayreuth.se.teaching.list.Main</maven.mainclass>
-        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.CucumberTestRunner</maven.cucumber.testsuite>
 
         <!-- Maven Plugins -->
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <maven.plugin.compiler.version>3.13.0</maven.plugin.compiler.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <maven.plugin.surefire.version>3.2.5</maven.plugin.surefire.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <maven.plugin.jar.version>3.4.1</maven.plugin.jar.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jxr-plugin -->
         <maven.plugin.jxr.version>3.3.2</maven.plugin.jxr.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
@@ -45,6 +55,9 @@
         <maven.plugin.jacoco.version>0.8.12</maven.plugin.jacoco.version>
         <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
         <maven.plugin.sonar.scanner.version>3.11.0.3922</maven.plugin.sonar.scanner.version>
+
+        <!-- Spring Boot -->
+        <spring.boot.version>3.2.5</spring.boot.version>
 
         <!-- JUnit -->
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
@@ -59,6 +72,14 @@
         <!-- Other tools -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <lombok.version>1.18.32</lombok.version>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding -->
+        <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <mapstruct.version>1.6.0.Beta2</mapstruct.version>
+        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+        <flyway.version>10.13.0</flyway.version>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+        <springdoc.openapi.version>2.5.0</springdoc.openapi.version>
     </properties>
 
     <pluginRepositories>
@@ -70,6 +91,25 @@
     </pluginRepositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -89,12 +129,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
@@ -105,19 +139,6 @@
             <artifactId>cucumber-junit-platform-engine</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
@@ -133,14 +154,33 @@
                     <compilerArgs>
                         <arg>-proc:full</arg>
                     </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok.mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>${spring.boot.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.plugin.surefire.version}</version>
-                <configuration>
-                    <test>${maven.cucumber.testsuite}</test>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -175,6 +215,23 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipIfEmpty>true</skipIfEmpty>
+                    <excludes>
+                        <exclude>**/application-*.yaml</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${maven.plugin.jacoco.version}</version>
@@ -207,18 +264,6 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${maven.plugin.sonar.scanner.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
