@@ -23,6 +23,11 @@ public class ListServiceImpl implements ListService {
                 .toList();
     }
 
+    public List<Value> delete() {
+        list.clear();
+        return null;
+    }
+
     @Override
     public void append(List<Value> valuesToAppend) {
         valuesToAppend.forEach(
