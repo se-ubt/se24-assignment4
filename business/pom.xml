@@ -15,9 +15,6 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.plugin.surefire.version}</version>
-                <configuration>
-                    <test>${maven.cucumber.testsuite}</test>
-                </configuration>
             </plugin>
         </plugins>
     </build>
