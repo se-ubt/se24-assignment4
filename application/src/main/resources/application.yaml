@@ -1,6 +1,11 @@
 spring:
   application:
     name: se24-demo
+  autoconfigure:
+    exclude: # prevent issues with Spring searching for database while we have not discussed Docker in the lectures yet
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
   #datasource:
   #  driver-class-name: org.postgresql.Driver
   #flyway:

@@ -8,10 +8,10 @@
         <version>0.5.0</version>
     </parent>
 
-    <artifactId>application</artifactId>
+    <artifactId>data</artifactId>
 
     <properties>
-        <start-class>de.unibayreuth.se.teaching.list.Application</start-class>
+        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.data.impl.CucumberListTestRunner</maven.cucumber.testsuite>
     </properties>
 
     <dependencies>
@@ -21,15 +21,12 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>de.unibayreuth.se.teaching.list</groupId>
-            <artifactId>api</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>de.unibayreuth.se.teaching.list</groupId>
-            <artifactId>data</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,17 +36,34 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>${flyway.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.plugin.surefire.version}</version>
                 <configuration>
-                    <skip>false</skip>
+                    <test>${maven.cucumber.testsuite}</test>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

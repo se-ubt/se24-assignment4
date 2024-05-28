@@ -8,6 +8,7 @@ behavior-driven development, as well as architectures for web applications.
 ### Start application
 
 ```bash
+cd application
 mvn spring-boot:run
 ```
 

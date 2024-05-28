@@ -10,11 +10,6 @@
 
     <artifactId>business</artifactId>
 
-    <properties>
-        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.business.impl.CucumberListTestRunner</maven.cucumber.testsuite>
-    </properties>
-
-
     <build>
         <plugins>
             <plugin>

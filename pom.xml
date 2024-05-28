@@ -19,7 +19,7 @@
 
     <modules>
         <module>business</module>
-        <!--module>data</module--> <!-- will be added later -->
+        <module>data</module>
         <module>api</module>
         <module>application</module>
     </modules>
@@ -30,7 +30,6 @@
         <!-- Project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <start-class>de.unibayreuth.se.teaching.list.Application</start-class>
 
         <!-- Maven -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -264,6 +263,13 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${maven.plugin.sonar.scanner.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
