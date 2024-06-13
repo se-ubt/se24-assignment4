@@ -1,6 +1,5 @@
-package de.unibayreuth.se.teaching.list.data.impl;
+package de.unibayreuth.se.teaching.list.data.persistence;
 
-import de.unibayreuth.se.teaching.list.data.persistence.DoublyLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

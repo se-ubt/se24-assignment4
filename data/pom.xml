@@ -11,7 +11,7 @@
     <artifactId>data</artifactId>
 
     <properties>
-        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.data.impl.CucumberListTestRunner</maven.cucumber.testsuite>
+        <maven.cucumber.testsuite>de.unibayreuth.se.teaching.list.data.persistence.CucumberListTestRunner</maven.cucumber.testsuite>
     </properties>
 
     <dependencies>

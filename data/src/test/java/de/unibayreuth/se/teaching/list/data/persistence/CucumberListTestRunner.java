@@ -1,4 +1,4 @@
-package de.unibayreuth.se.teaching.list.data.impl;
+package de.unibayreuth.se.teaching.list.data.persistence;
 
 import io.cucumber.junit.platform.engine.Constants;
 import org.junit.platform.suite.api.ConfigurationParameter;

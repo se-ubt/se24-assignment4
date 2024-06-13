@@ -69,6 +69,8 @@
         <hamcrest.version>2.2</hamcrest.version>
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <cucumber.version>7.17.0</cucumber.version>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+        <mockito.version>5.12.0</mockito.version>
 
         <!-- Other tools -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -141,6 +143,18 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -198,6 +212,9 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.plugin.surefire.version}</version>
+                <configuration>
+                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
